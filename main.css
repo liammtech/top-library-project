@@ -42,7 +42,7 @@ h1, p {
     font-size: large;
 }
 
-.read, .remove {
+.read, .not-read, .remove {
     padding: 6px;
 }
 

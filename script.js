@@ -75,7 +75,7 @@ addNewBookForm.addEventListener("submit", (e) => {
             }
         }
 
-        // Add empty field validation
+        // Add validation against empty fields
         if (!title.value | !author.value | !pages.value) {
             alert("Please ensure all fields are filled with an appropriate value.");
             return;
@@ -84,6 +84,7 @@ addNewBookForm.addEventListener("submit", (e) => {
         addBookToLibrary(title.value, author.value, pages.value, read.checked);
         console.log(myLibrary);
         resetFormDefaults();
+        displayBooksOnPage();
         addNewBookModal.close();
 
     } else if (e.submitter.id === "cancel") {
@@ -91,3 +92,43 @@ addNewBookForm.addEventListener("submit", (e) => {
         addNewBookModal.close();
     }
 });
+
+// 4. Function to loop through library array and print to screen
+function displayBooksOnPage() {
+    document.querySelectorAll('.book-card').forEach(e => e.remove());
+    const mainContainer = document.querySelector("#main-container")
+    for (let entry in myLibrary) {
+        // Get the values
+        const title = myLibrary[entry].title;
+        const author = myLibrary[entry].author;
+        const pages = myLibrary[entry].pages;
+        const read = myLibrary[entry].read;
+
+        // Create the card div
+        const newBookCard = document.createElement('div');
+
+        // Set the id and class of the card div
+        newBookCard.setAttribute('id', myLibrary[entry])
+        newBookCard.setAttribute('class', 'book-card')
+
+        // Set state of "Read" element
+        const readClass = "not-read";
+        const readStatus = "Not read";
+        if (read) {
+            readClass = "read";
+            readStatus = "Read";
+        }
+
+        // Add innerHTML with the values
+        newBookCard.innerHTML = `
+        <p>"${title}"</p>
+        <p>${author}</p>
+        <p>${pages} pages</p>
+        <button class="${readClass}">${readStatus}</button>
+        <button class="remove">Remove</button>
+        `
+
+        // Push to page
+        mainContainer.appendChild(newBookCard);
+    }
+}
