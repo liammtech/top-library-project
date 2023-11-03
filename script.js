@@ -58,14 +58,24 @@ addNewBookForm.addEventListener("submit", (e) => {
     let pages = document.getElementById("pages");
     let read = document.getElementById("read");
 
+    // Add function to reset the form when necessary
+    function resetFormDefaults() {
+        title.value = "";
+        author.value = "";
+        pages.value = "";
+        read.value = false;
+    }
+
     // Add single-entry validation
     for (let entry in myLibrary) {
         if (title.value === myLibrary[entry].title) {
             alert("Title is already an entry in the library, please choose another");
+            resetFormDefaults();
             return;
         }
     }
 
     addBookToLibrary(title.value, author.value, pages.value, read.value);
     console.log(myLibrary);
+    resetFormDefaults();
 });
