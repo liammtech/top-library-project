@@ -7,10 +7,13 @@
     - Read it or not
 3. Function to add book to library
     3a. Create modal to retrieve new book info from user
-4. Function to remove book from library
-5. Function to remove all books from library
+    3b. Wire up modal to "add book" function
+4 Function to loop through the array and displays all books on the page
+5. Function to remove book from library
 6. Function to toggle "read" status on or off
-7. Function to loop through the array and displays all books on the page
+7. Function to remove all books from library
+
+
 */
 
 // 1. Create an array to store the books
