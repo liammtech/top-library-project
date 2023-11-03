@@ -6,6 +6,7 @@
     - No. of pages
     - Read it or not
 3. Function to add book to library
+    3a. Create modal to retrieve new book info from user
 4. Function to remove book from library
 5. Function to remove all books from library
 6. Function to toggle "read" status on or off
@@ -23,4 +24,11 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+}
+
+// 3. Function to add book to library
+
+function addBookToLibrary(title, author, pages, read) {
+    newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
 }
