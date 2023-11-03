@@ -67,7 +67,7 @@ addNewBookForm.addEventListener("submit", (e) => {
 
     if (e.submitter.id === "submit") {
 
-        // Add single-entry validation
+        // Add unique-entry validation
         for (let entry in myLibrary) {
             if (title.value === myLibrary[entry].title) {
                 alert("Title is already an entry in the library, please choose another");
@@ -75,11 +75,17 @@ addNewBookForm.addEventListener("submit", (e) => {
             }
         }
 
+        // Add empty field validation
+        if (!title.value | !author.value | !pages.value) {
+            alert("Please ensure all fields are filled with an appropriate value.");
+            return;
+        };
+
         addBookToLibrary(title.value, author.value, pages.value, read.checked);
         console.log(myLibrary);
         resetFormDefaults();
         addNewBookModal.close();
-        
+
     } else if (e.submitter.id === "cancel") {
         resetFormDefaults();
         addNewBookModal.close();
