@@ -53,19 +53,24 @@ let addNewBookForm  = document.querySelector("#add-book-form");
 addNewBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let title = document.getElementById("title");
-    let author = document.getElementById("author");
-    let pages = document.getElementById("pages");
-    let read = document.getElementById("read");
+    if (e.submitter.id === "submit") {
 
-    // Add single-entry validation
-    for (let entry in myLibrary) {
-        if (title.value === myLibrary[entry].title) {
-            alert("Title is already an entry in the library, please choose another");
-            return;
+        let title = document.getElementById("title");
+        let author = document.getElementById("author");
+        let pages = document.getElementById("pages");
+        let read = document.getElementById("read");
+
+        // Add single-entry validation
+        for (let entry in myLibrary) {
+            if (title.value === myLibrary[entry].title) {
+                alert("Title is already an entry in the library, please choose another");
+                return;
+            }
         }
-    }
 
-    addBookToLibrary(title.value, author.value, pages.value, read.value);
-    console.log(myLibrary);
+        addBookToLibrary(title.value, author.value, pages.value, read.checked);
+        console.log(myLibrary);
+    } else if (e.submitter.id === "cancel") {
+        addNewBookModal.close();
+    }
 });
