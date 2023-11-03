@@ -4,11 +4,15 @@
 }
 
 body {
+    height: 100%;
     margin: 0;
     background-color: rgb(241, 241, 241);
+    background-image: url(./images/bookshelf.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-h1 {
+h1, p {
     margin: 0;
 }
 
@@ -17,11 +21,10 @@ h1 {
     justify-content: center;
     height: 100px;
     background-color: #FAF9F6;
-    box-shadow: #cfcfcf 0px 5px 5px;
 }
 
 #page-content {
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
 }
@@ -39,19 +42,56 @@ h1 {
     font-size: large;
 }
 
+.read, .remove {
+    padding: 6px;
+}
+
 #main-container {
+    height: 100%;
     width: 55vw;
     display: grid;
-    grid-template: 100px 1fr 1fr / 1fr 1fr 1fr;
-    grid-template-areas: 
-        ". button-area ."
-        "card-1 card-2 card-3"
-        "card-4 card-5 card-6"
-    ;
+    grid-template: 100px / 1fr 1fr 1fr;
+    gap: 20px;
+    grid-auto-flow: row;
+    grid-auto-rows: 240px;
     align-items: center;
     justify-items: center;
+    margin-bottom: 64px;
 }
 
 #add-book-button {
-    grid-area: button-area;
+    margin-top: 20px;
+    grid-row: 1;
+    grid-column: span 3;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;;
+    text-align: center;
+    align-items: stretch;
+    justify-content: space-between;
+    background-color: #FAF9F6;
+    box-shadow: rgb(112, 112, 112) 2px 2px 2px;
+    height: 200px;
+    width: 300px;
+    border-radius: 10px;
+    font-size: 18px;
+    > button {
+        font-size: 18px;
+    }
+}
+
+#page-footer {
+    > h3 {
+        color: #FAF9F6;
+        text-shadow: black 2px 2px 2px;
+    };
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: end;
+    padding-right: 20px;
+    box-sizing: border-box;
 }
