@@ -136,7 +136,6 @@ function displayBooksOnPage() {
 
 // 5. Function to remove book from library
 
-
 // Function adds book card event handling
 function addBookCardListeners() {
     let bookCards = document.querySelectorAll(".book-card");
@@ -144,11 +143,30 @@ function addBookCardListeners() {
         if (bookCard.getAttribute('listener') !== 'true') {
             bookCard.addEventListener('click', (e) => {
                 if (e.target.getAttribute("class") === "remove") {
-                    alert("Do the remove function!");
+                    removeBook(bookCard.id);
                 } else if (e.target.getAttribute("class") === "read" | e.target.getAttribute("class") === "not-read" ) {
-                    alert("Do the read toggle function!")
+                    toggleReadStatus(bookCard.id);
                 }
             });
         }
     });
+}
+
+// Actual delete function
+function removeBook(entryIndex) {
+    delete myLibrary[entryIndex];
+    displayBooksOnPage();
+}
+
+// 6. Function to toggle "read" status on or off
+function toggleReadStatus(entryIndex) {
+    let currentBookCard = document.getElementById(entryIndex);
+    let readButton = currentBookCard.childNodes[7]
+    readButton.classList.toggle("read");
+    readButton.classList.toggle("not-read");
+    if (readButton.textContent === "Read") {
+        readButton.textContent = "Not read";
+    } else if (readButton.textContent === "Not read") {
+        readButton.textContent = "Read";
+    };
 }
