@@ -172,3 +172,11 @@ function toggleReadStatus(entryIndex) {
         readButton.textContent = "Read";
     };
 }
+
+// 7. Function to remove all books from library
+const resetAllButton = document.getElementById("reset-all-button");
+
+resetAllButton.addEventListener("click", () => {
+    myLibrary = [];
+    displayBooksOnPage();
+});
