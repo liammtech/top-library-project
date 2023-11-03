@@ -108,12 +108,12 @@ function displayBooksOnPage() {
         const newBookCard = document.createElement('div');
 
         // Set the id and class of the card div
-        newBookCard.setAttribute('id', myLibrary[entry])
+        newBookCard.setAttribute('id', entry)
         newBookCard.setAttribute('class', 'book-card')
 
         // Set state of "Read" element
-        const readClass = "not-read";
-        const readStatus = "Not read";
+        let readClass = "not-read";
+        let readStatus = "Not read";
         if (read) {
             readClass = "read";
             readStatus = "Read";
@@ -130,5 +130,25 @@ function displayBooksOnPage() {
 
         // Push to page
         mainContainer.appendChild(newBookCard);
+        addBookCardListeners();
     }
+}
+
+// 5. Function to remove book from library
+
+
+// Function adds book card event handling
+function addBookCardListeners() {
+    let bookCards = document.querySelectorAll(".book-card");
+    bookCards.forEach((bookCard) => {
+        if (bookCard.getAttribute('listener') !== 'true') {
+            bookCard.addEventListener('click', (e) => {
+                if (e.target.getAttribute("class") === "remove") {
+                    alert("Do the remove function!");
+                } else if (e.target.getAttribute("class") === "read" | e.target.getAttribute("class") === "not-read" ) {
+                    alert("Do the read toggle function!")
+                }
+            });
+        }
+    });
 }

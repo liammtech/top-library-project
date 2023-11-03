@@ -46,6 +46,14 @@ h1, p {
     padding: 6px;
 }
 
+.read {
+    background-color: rgb(206, 236, 176);
+}
+
+.not-read {
+    background-color: rgb(236, 185, 176);
+}
+
 #main-container {
     height: 100%;
     width: 55vw;
@@ -84,16 +92,16 @@ h1, p {
 }
 
 #page-footer {
-    > h3 {
-        color: #FAF9F6;
-        text-shadow: black 2px 2px 2px;
-    };
     position: fixed;
     width: 100%;
     bottom: 0;
     text-align: end;
     padding-right: 20px;
     box-sizing: border-box;
+    > h3 {
+        color: #FAF9F6;
+        text-shadow: black 2px 2px 2px;
+    };
 }
 
 dialog#add-book-modal {
