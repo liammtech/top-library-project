@@ -95,3 +95,64 @@ h1, p {
     padding-right: 20px;
     box-sizing: border-box;
 }
+
+dialog#add-book-modal {
+    height: 360px;
+    width: 300px;
+    padding: 30px;
+    border: none;
+    border-radius: 10px;
+    > form > p, input[text] {
+        display: block;
+    }
+}
+
+#add-book-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    text-align: center;
+    font-size: 22px;
+    > h2 {
+        margin: 0;
+        font-size: 26px;
+    }
+    > input {
+        font-size: 22px;
+        height: 36px;
+    }
+}
+
+input::-webkit-input-placeholder {
+    font-size: 22px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+
+::backdrop {
+    background-color:black;
+    opacity: 0.5;
+}
+
+#read-check {
+    display: flex;
+    text-align: center;
+    gap: 20px;
+    justify-content: center;
+}
+
+#form-buttons {
+    display: flex;
+    justify-content: stretch;
+    gap: 10px;
+    width: 100%;
+    > button {
+        flex: 1;
+        font-size: 22px;
+    }
+}
+
