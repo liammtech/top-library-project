@@ -22,6 +22,8 @@ h1 {
 
 #page-content {
     height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 #header-bar {
@@ -31,8 +33,25 @@ h1 {
     width: 55vw;
 }
 
-#reset-all-button {
+#reset-all-button, #add-book-button {
     height: 50px;
     width: 120px;
     font-size: large;
+}
+
+#main-container {
+    width: 55vw;
+    display: grid;
+    grid-template: 100px 1fr 1fr / 1fr 1fr 1fr;
+    grid-template-areas: 
+        ". button-area ."
+        "card-1 card-2 card-3"
+        "card-4 card-5 card-6"
+    ;
+    align-items: center;
+    justify-items: center;
+}
+
+#add-book-button {
+    grid-area: button-area;
 }
