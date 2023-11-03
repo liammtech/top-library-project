@@ -140,12 +140,14 @@ function displayBooksOnPage() {
 function addBookCardListeners() {
     let bookCards = document.querySelectorAll(".book-card");
     bookCards.forEach((bookCard) => {
-        if (bookCard.getAttribute('listener') !== 'true') {
+        if (!bookCard.hasEventListener) {
+            bookCard.hasEventListener = true;
             bookCard.addEventListener('click', (e) => {
                 if (e.target.getAttribute("class") === "remove") {
                     removeBook(bookCard.id);
                 } else if (e.target.getAttribute("class") === "read" | e.target.getAttribute("class") === "not-read" ) {
                     toggleReadStatus(bookCard.id);
+                    return;
                 }
             });
         }
