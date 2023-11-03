@@ -17,18 +17,23 @@
     <main id="page-content">
         <div id="main-container">
             <dialog id="add-book-modal">
-                <form id="add-book-form" method="post">
+                <form id="add-book-form" action="./script.js" method="post">
                     <h2>Add new book</h2>
+                    <label for="title" style="display: none;">Title</label>
                     <input type="text" id="title" name="title" placeholder="Title">
+                    <label for="author" style="display: none;">Author</label>
                     <input type="text" id="author" name="author" placeholder="Author">
+                    <label for="pages" style="display: none;">Pages</label>
                     <input type="number" id="pages" name="pages" placeholder="Pages">
                     <div id="read-check">
                         <label for="read">Have you read it?</label>
                         <input type="checkbox" id="read" name="read" value="read">
                     </div>
                     <div id="form-buttons">
-                        <button>Submit</button>
-                        <button>Cancel</button>
+                        <label for="submit" style="display: none;">Submit</label>
+                        <button type="submit" name="submit">Submit</button>
+                        <label for="cancel" style="display: none;">Cancel</label>
+                        <button name="cancel">Cancel</button>
                     </div>
                 </form>
             </dialog>

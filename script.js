@@ -47,10 +47,17 @@ addNewBookButton.addEventListener("click", () => {
     addNewBookModal.showModal();
 });
 
-// Add event listener to close modal if user clicks outside
-$(document).click(function(event) {
-    //if you click on anything except the modal itself or the "open modal" link, close the modal
-    if (!$(event.target).closest(".add-book-modal").length) {
-        $("body").find(".add-book-modal").removeClass("visible");
-    }
+// 3b. Wire the modal up to the addBookToLibrary function
+let addNewBookForm  = document.querySelector("#add-book-form");
+
+addNewBookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let title = document.getElementById("title");
+    let author = document.getElementById("author");
+    let pages = document.getElementById("pages");
+    let read = document.getElementById("read");
+
+    addBookToLibrary(title.value, author.value, pages.value, read.value);
+    console.log(myLibrary);
 });
