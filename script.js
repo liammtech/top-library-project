@@ -53,12 +53,19 @@ let addNewBookForm  = document.querySelector("#add-book-form");
 addNewBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if (e.submitter.id === "submit") {
+    let title = document.getElementById("title");
+    let author = document.getElementById("author");
+    let pages = document.getElementById("pages");
+    let read = document.getElementById("read");
 
-        let title = document.getElementById("title");
-        let author = document.getElementById("author");
-        let pages = document.getElementById("pages");
-        let read = document.getElementById("read");
+    function resetFormDefaults() {
+        title.value = "";
+        author.value = "";
+        pages.value = "";
+        read.checked = false;
+    }
+
+    if (e.submitter.id === "submit") {
 
         // Add single-entry validation
         for (let entry in myLibrary) {
@@ -70,7 +77,11 @@ addNewBookForm.addEventListener("submit", (e) => {
 
         addBookToLibrary(title.value, author.value, pages.value, read.checked);
         console.log(myLibrary);
+        resetFormDefaults();
+        addNewBookModal.close();
+        
     } else if (e.submitter.id === "cancel") {
+        resetFormDefaults();
         addNewBookModal.close();
     }
 });
