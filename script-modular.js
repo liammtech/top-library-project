@@ -1,8 +1,10 @@
 // Wrap app in anonymous function
 (function() {
-
     // Create app object
     var libraryApp = {
+
+        // Create empty array for "library"
+        myLibrary: [],
 
         // Add init function
         init: function() {
@@ -64,9 +66,9 @@
             this.formPages.value = "";
             this.formRead.checked = false;
         }
-
     };
 
     // Initialise app
     libraryApp.init()
+
 })();
