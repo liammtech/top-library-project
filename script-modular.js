@@ -60,29 +60,42 @@ function app () {
         formHandling: function(e) {
             e.preventDefault();
             if (e.submitter.id === "submit") {
-                for (let entry in this.myLibrary) {
-                    if (this.formTitle.value === this.myLibrary[entry].title) {
-                        alert("Title is already an entry in the library, please choose another");
+                validationResult = this.submitValidation();
+                    if (validationResult) {
+                    this.addToLibrary(
+                        this.formTitle.value, 
+                        this.formAuthor.value, 
+                        this.formPages.value, 
+                        this.formRead.checked
+                    );
+                    this.resetFormDefaults();
+                    this.render();
+                    this.modal.close();
+                    } else {
                         return;
                     }
-                }
-                if (!this.formTitle.value | !this.formAuthor.value | !this.formPages.value) {
-                    alert("Please ensure all fields are filled with an appropriate value.");
-                    return;
-                };
-                this.addToLibrary(
-                    this.formTitle.value, 
-                    this.formAuthor.value, 
-                    this.formPages.value, 
-                    this.formRead.checked
-                );
-                this.resetFormDefaults();
-                this.render();
-                this.modal.close();
             } else if (e.submitter.id === "cancel") {
                 this.resetFormDefaults();
                 this.modal.close();
             }
+        },
+
+        // submitValidation: validate submitted form values
+        submitValidation: function() {
+            validation = true;
+            for (let entry in this.myLibrary) {
+                if (this.formTitle.value === this.myLibrary[entry].title) {
+                    alert("Title is already an entry in the library, please choose another");
+                    validation = false;
+                    return validation;
+                }
+            }
+            if (!this.formTitle.value | !this.formAuthor.value | !this.formPages.value) {
+                alert("Please ensure all fields are filled with an appropriate value.");
+                validation = false;
+                return validation;
+            };
+            return validation;    
         },
 
         // resetFormDefaults: resets form values
