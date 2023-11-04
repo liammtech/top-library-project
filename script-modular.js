@@ -32,7 +32,7 @@
         // handleEvents: event handling
         handleEvents: function() {
             this.addButton.addEventListener("click", () => {this.modal.showModal()});
-            this.form.addEventListener("submit", () => {});
+            this.form.addEventListener("submit", formHandling(e));
             this.bookCards.forEach((bookCard) => {});
         },
 
@@ -48,8 +48,13 @@
         },
 
         // formHandling: handles form submission values and cancelling
-        formHandling: function() {
+        formHandling: function(e) {
             
+        },
+
+        // resetFormDefaults: resets form values
+        resetFormDefaults: function() {
+
         }
 
     };
