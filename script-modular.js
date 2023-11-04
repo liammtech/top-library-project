@@ -9,7 +9,7 @@
 
             // Initialisation functions
             this.cacheDom();
-            this.bindEvents();
+            this.handleEvents();
             this.render();
         },
 
@@ -31,7 +31,7 @@
 
         // handleEvents: event handling
         handleEvents: function() {
-            this.addButton.addEventListener("click", () => {});
+            this.addButton.addEventListener("click", () => {this.modal.showModal()});
             this.form.addEventListener("submit", () => {});
             this.bookCards.forEach((bookCard) => {});
         },
@@ -45,9 +45,15 @@
             this.author = author;
             this.pages = pages;
             this.read = read;
+        },
+
+        // formHandling: handles form submission values and cancelling
+        formHandling: function() {
+            
         }
+
     };
 
     // Initialise app
     libraryApp.init()
-});
+})();
