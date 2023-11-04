@@ -22,14 +22,19 @@
             this.addButton = document.querySelector("#add-book-button");
             this.modal = document.querySelector("#add-book-modal");
             this.form = document.querySelector("#add-book-form");
-            this.title = document.getElementById("title");
-            this.author = document.getElementById("author");
-            this.pages = document.getElementById("pages");
-            this.read = document.getElementById("read");
+            this.formTitle = document.getElementById("title");
+            this.formAuthor = document.getElementById("author");
+            this.formPages = document.getElementById("pages");
+            this.formRead = document.getElementById("read");
+            this.reset = document.getElementById("reset-all-button");
         },
 
-        // bindEvents: event handling
-        bindEvents: function() {},
+        // handleEvents: event handling
+        handleEvents: function() {
+            this.addButton.addEventListener("click", () => {});
+            this.form.addEventListener("submit", () => {});
+            this.bookCards.forEach((bookCard) => {});
+        },
 
         // render: pushes to page document
         render: function() {},
