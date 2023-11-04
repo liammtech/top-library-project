@@ -35,7 +35,7 @@ function app () {
         handleEvents: function() {
             this.addButton.addEventListener("click", () => {this.modal.showModal()});
             this.form.addEventListener("submit", this.formHandling.bind(this));
-            this.bookCards.forEach((bookCard) => {});
+            this.bookCards.forEach((bookCard) => {this.bookCardHandling.bind(this)});
         },
 
         // render: pushes to page document
@@ -92,8 +92,20 @@ function app () {
             console.log(this.myLibrary);
         },
 
-        // removeFromLibrary: remove Book object from library
-        removeFromLibrary: function()
+        // bookCardHandling: handles actions on bookcard
+        bookCardHandling: function(e) {
+            if (!bookCard.hasEventlistener) {
+                bookCard.hasEventListener = true;
+                bookCard.addEventListener('click', (e) => {
+                    if (e.target.getAttribute("class") === "remove") {
+                        this.removeFromLibrary(bookCard.id);
+                    } else if (e.target.getAttribute("class") === "read" | e.target.getAttribute("class") === "not-read" ) {
+                        this.toggleReadStatus(bookCard.id);
+                        return;
+                    }
+                });
+            }           
+        },
 
         // formHandling: handles whether form is submitted or cancelled
         formHandling: function(e) {
