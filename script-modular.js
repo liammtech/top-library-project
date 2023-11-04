@@ -39,7 +39,43 @@ function app () {
         },
 
         // render: pushes to page document
-        render: function() {},
+        render: function() {
+            document.querySelectorAll('.book-card').forEach(e => e.remove());
+            for (let entry in this.myLibrary) {
+                // Get the values
+                this.title = this.myLibrary[entry].title;
+                this.author = this.myLibrary[entry].author;
+                this.pages = this.myLibrary[entry].pages;
+                this.read = this.myLibrary[entry].read;
+        
+                // Create the card div
+                const newBookCard = document.createElement('div');
+        
+                // Set the id and class of the card div
+                newBookCard.setAttribute('id', entry)
+                newBookCard.setAttribute('class', 'book-card')
+        
+                // Set state of "Read" element
+                let readClass = "not-read";
+                let readStatus = "Not read";
+                if (this.read) {
+                    readClass = "read";
+                    readStatus = "Read";
+                }
+        
+                // Add innerHTML with the values
+                newBookCard.innerHTML = `
+                <p>"${this.title}"</p>
+                <p>${this.author}</p>
+                <p>${this.pages} pages</p>
+                <button class="${readClass}">${readStatus}</button>
+                <button class="remove">Remove</button>
+                `
+        
+                // Push to page
+                this.container.appendChild(newBookCard);
+            }
+        },
 
         // bookConstructor: creates book object
         bookConstructor: function Book(title, author, pages, read) {
@@ -49,39 +85,47 @@ function app () {
             this.read = read;
         },
 
-        // addToLibrary: add book object to library
+        // addToLibrary: add Book object to library
         addToLibrary: function(title, author, pages, read) {
             this.newBook = new this.bookConstructor(title, author, pages, read);
             this.myLibrary.push(this.newBook);
             console.log(this.myLibrary);
         },
 
-        // formHandling: handles form submission values and cancelling
+        // removeFromLibrary: remove Book object from library
+        removeFromLibrary: function()
+
+        // formHandling: handles whether form is submitted or cancelled
         formHandling: function(e) {
             e.preventDefault();
             if (e.submitter.id === "submit") {
-                validationResult = this.submitValidation();
-                    if (validationResult) {
-                    this.addToLibrary(
-                        this.formTitle.value, 
-                        this.formAuthor.value, 
-                        this.formPages.value, 
-                        this.formRead.checked
-                    );
-                    this.resetFormDefaults();
-                    this.render();
-                    this.modal.close();
-                    } else {
-                        return;
-                    }
+                validationResult = this.validateForm();
+                if (validationResult) {
+                    this.formSubmit();
+                } else {
+                    return;
+                }
             } else if (e.submitter.id === "cancel") {
                 this.resetFormDefaults();
                 this.modal.close();
             }
         },
 
-        // submitValidation: validate submitted form values
-        submitValidation: function() {
+        // formSubmit: handles form submission
+        formSubmit: function() {
+            this.addToLibrary(
+                this.formTitle.value, 
+                this.formAuthor.value, 
+                this.formPages.value, 
+                this.formRead.checked
+            );
+            this.resetFormDefaults();
+            this.render();
+            this.modal.close();
+        },
+
+        // validateForm: validate form values
+        validateForm: function() {
             validation = true;
             for (let entry in this.myLibrary) {
                 if (this.formTitle.value === this.myLibrary[entry].title) {
