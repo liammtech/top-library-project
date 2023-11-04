@@ -38,6 +38,14 @@
 
         // render: pushes to page document
         render: function() {},
+
+        // bookConstructor: creates book object
+        bookConstructor: function Book(title, author, pages, read) {
+            this.title = title;
+            this.author = author;
+            this.pages = pages;
+            this.read = read;
+        }
     };
 
     // Initialise app
