@@ -1,7 +1,11 @@
 // Wrap app in anonymous function
 (function() {
 
-    // Initialise app object
-    var libraryApp = {}
-    
+    // Create app object
+    var libraryApp = {
+        myLibrary: [],
+    };
+
+    // Initialise app
+    libraryApp.init()
 });
