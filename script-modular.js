@@ -49,12 +49,16 @@
 
         // formHandling: handles form submission values and cancelling
         formHandling: function(e) {
-            
+            e.preventDefault();
+            this.resetFormDefaults();
         },
 
         // resetFormDefaults: resets form values
         resetFormDefaults: function() {
-
+            this.formTitle.value = "";
+            this.formAuthor.value = "";
+            this.formPages.value = "";
+            this.formRead.checked = false;
         }
 
     };
