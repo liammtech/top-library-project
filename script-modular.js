@@ -1,5 +1,5 @@
 // Wrap app in anonymous function
-(function() {
+function app () {
     // Create app object
     var libraryApp = {
 
@@ -34,7 +34,7 @@
         // handleEvents: event handling
         handleEvents: function() {
             this.addButton.addEventListener("click", () => {this.modal.showModal()});
-            this.form.addEventListener("submit", formHandling(e));
+            this.form.addEventListener("submit", this.formHandling.bind(this));
             this.bookCards.forEach((bookCard) => {});
         },
 
@@ -51,13 +51,38 @@
 
         // addToLibrary: add book object to library
         addToLibrary: function(title, author, pages, read) {
-            this.newBook = new Book(title, author, pages, read);
-            this.myLibrary.push(newBook);
+            this.newBook = new this.bookConstructor(title, author, pages, read);
+            this.myLibrary.push(this.newBook);
+            console.log(this.myLibrary);
         },
 
         // formHandling: handles form submission values and cancelling
         formHandling: function(e) {
-            
+            e.preventDefault();
+            if (e.submitter.id === "submit") {
+                for (let entry in this.myLibrary) {
+                    if (this.formTitle.value === this.myLibrary[entry].title) {
+                        alert("Title is already an entry in the library, please choose another");
+                        return;
+                    }
+                }
+                if (!this.formTitle.value | !this.formAuthor.value | !this.formPages.value) {
+                    alert("Please ensure all fields are filled with an appropriate value.");
+                    return;
+                };
+                this.addToLibrary(
+                    this.formTitle.value, 
+                    this.formAuthor.value, 
+                    this.formPages.value, 
+                    this.formRead.checked
+                );
+                this.resetFormDefaults();
+                this.render();
+                this.modal.close();
+            } else if (e.submitter.id === "cancel") {
+                this.resetFormDefaults();
+                this.modal.close();
+            }
         },
 
         // resetFormDefaults: resets form values
@@ -72,4 +97,6 @@
     // Initialise app
     libraryApp.init()
 
-})();
+};
+
+app();
