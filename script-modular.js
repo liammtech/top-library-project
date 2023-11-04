@@ -51,13 +51,13 @@
 
         // addToLibrary: add book object to library
         addToLibrary: function(title, author, pages, read) {
-
+            this.newBook = new Book(title, author, pages, read);
+            this.myLibrary.push(newBook);
         },
 
         // formHandling: handles form submission values and cancelling
         formHandling: function(e) {
-            this.newBook = new Book(title, author, pages, read);
-            this.myLibrary.push(newBook);
+            
         },
 
         // resetFormDefaults: resets form values
