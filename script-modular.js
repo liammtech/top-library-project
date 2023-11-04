@@ -47,10 +47,14 @@
             this.read = read;
         },
 
+        // addToLibrary: add book object to library
+        addToLibrary: function(title, author, pages, read) {
+
+        },
+
         // formHandling: handles form submission values and cancelling
         formHandling: function(e) {
-            e.preventDefault();
-            this.resetFormDefaults();
+            
         },
 
         // resetFormDefaults: resets form values
