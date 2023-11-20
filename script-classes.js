@@ -1,12 +1,12 @@
 (function() {
-    var libraryApp = {
-        myLibrary: [],
-        init: function() {
+    class libraryApp {
+        myLibrary = [];
+        init() {
             this.cacheDom();
             this.handleSingleEvents();
             this.render();
-        },
-        cacheDom: function() {
+        }
+        cacheDom() {
             this.container = document.querySelector("#main-container");
             this.bookCards = document.querySelectorAll(".book-card");
             this.addButton = document.querySelector("#add-book-button");
@@ -17,13 +17,13 @@
             this.formPages = document.getElementById("pages");
             this.formRead = document.getElementById("read");
             this.reset = document.getElementById("reset-all-button");
-        },
-        handleSingleEvents: function() {
+        }
+        handleSingleEvents() {
             this.addButton.addEventListener("click", () => {this.modal.showModal()});
             this.form.addEventListener("submit", this.formHandling.bind(this));
             this.reset.addEventListener("click", this.resetAllButton.bind(this));
-        },
-        handleBookCardEvents: function() {      
+        }
+        handleBookCardEvents() {      
             this.cacheDom();      
             this.bookCards.forEach((bookCard) => {
                 if (!bookCard.hasEventListener) {
@@ -38,8 +38,8 @@
                     });
                 }
             });
-        },
-        render: function() {
+        }
+        render() {
             this.bookCards.forEach(e => e.remove());
             for (let entry in this.myLibrary) {
                 this.title = this.myLibrary[entry].title;
@@ -65,26 +65,28 @@
                 this.container.appendChild(newBookCard);
                 this.handleBookCardEvents();
             }
-        },
-        bookConstructor: function Book(title, author, pages, read) {
-            this.title = title;
-            this.author = author;
-            this.pages = pages;
-            this.read = read;
-        },
-        addToLibrary: function(title, author, pages, read) {
-            this.newBook = new this.bookConstructor(title, author, pages, read);
+        }
+        Book = class Book {
+            constructor(title, author, pages, read) {
+                this.title = title;
+                this.author = author;
+                this.pages = pages;
+                this.read = read;
+            }
+        }
+        addToLibrary(title, author, pages, read) {
+            this.newBook = new this.Book(title, author, pages, read);
             this.myLibrary.push(this.newBook);
             console.log(this.myLibrary);
-        },
-        removeFromLibrary: function(index) {
+        }
+        removeFromLibrary(index) {
             delete this.myLibrary[index];
             this.render();
-        },
-        formHandling: function(e) {
+        }
+        formHandling(e) {
             e.preventDefault();
             if (e.submitter.id === "submit") {
-                validationResult = this.validateForm();
+                let validationResult = this.validateForm();
                 if (validationResult) {
                     this.formSubmit();
                 } else {
@@ -94,8 +96,8 @@
                 this.resetFormDefaults();
                 this.modal.close();
             }
-        },
-        formSubmit: function() {
+        }
+        formSubmit() {
             this.addToLibrary(
                 this.formTitle.value, 
                 this.formAuthor.value, 
@@ -105,9 +107,9 @@
             this.resetFormDefaults();
             this.render();
             this.modal.close();
-        },
-        validateForm: function() {
-            validation = true;
+        }
+        validateForm() {
+            let validation = true;
             for (let entry in this.myLibrary) {
                 if (this.formTitle.value === this.myLibrary[entry].title) {
                     alert("Title is already an entry in the library, please choose another");
@@ -121,14 +123,14 @@
                 return validation;
             };
             return validation;    
-        },
-        resetFormDefaults: function() {
+        }
+        resetFormDefaults() {
             this.formTitle.value = "";
             this.formAuthor.value = "";
             this.formPages.value = "";
             this.formRead.checked = false;
-        },
-        toggleReadStatus: function(index) {
+        }
+        toggleReadStatus(index) {
             let currentBookCard = document.getElementById(index);
             let readButton = currentBookCard.childNodes[7]
             readButton.classList.toggle("read");
@@ -138,11 +140,12 @@
             } else if (readButton.textContent === "Not read") {
                 readButton.textContent = "Read";
             };
-        },
-        resetAllButton: function() {
+        }
+        resetAllButton() {
             this.myLibrary = [];
             this.render();
         }
     };
-    libraryApp.init()
+    app = new libraryApp();
+    app.init();
 })();
